@@ -142,7 +142,7 @@
     <canvas id="angleCanvas" width="400" height="400"></canvas>
 
     <div id="bar">
-      <input type="number" id="guessInput" placeholder="Input here :)" />
+      <input type="number" id="guessInput" placeholder="Input here..." onkeypress="if(event.key === 'Enter'){makeGuess();}" />
       <button onclick="makeGuess()">Try</button>
       <p>
         <span id="attempts">0</span>/4
