@@ -1,274 +1,305 @@
 <!DOCTYPE html>
 <html lang="it">
-  <head>
+
+<head>
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-QDPZQGQVPH"></script>
     <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
 
-      gtag('config', 'G-QDPZQGQVPH');
+        gtag('config', 'G-QDPZQGQVPH');
     </script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Guess the angle</title>
     <style>
-      /* Layout di base */
-      body {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-      }
-      
-      canvas {
-        margin: 20px;
-        border-radius: 10px;
-        width: 300px; /* Larghezza di default per schermi più grandi */
-        height: 300px;
-      }
-      
-      #main-title {
-        color: #000000;
-        font-size: 40px;
-        font-weight: bolder;
-        font-family: Georgia, serif;
-      }
-      
-      #bar {
-        height: auto;
-        width: 300px;
-        display: flex;
-        justify-content: space-between;
-      }
-      
-      #bar button {
-        width: 70px;
-        border-radius: 15px;
-      }
-      
-      #bar input {
-        border-radius: 15px;
-        max-width: 200px;
-      }
-      
-      p {
-        font-family: Georgia, serif;
-      }
-      
-      table {
-        margin: 20px;
-        border-collapse: collapse;
-        width: 300px;
-        text-align: center;
-      }
-      
-      th,
-      td {
-        padding: 3px;
-        border: 1px solid #444;
-      }
-      
-      .arrow-up {
-        color: #00aaff;
-        font-size: 1.5em;
-      }
-      
-      .success {
-        color: #ffcc00;
-        font-size: 1.5em;
-      }
-      
-      .cold {
-        color: #00aaff;
-      }
-      
-      .boiling {
-        color: #ff4500;
-        font-size: 1.5em;
-      }
-      
-      .emoji-win {
-        font-size: 1.5em;
-        color: #ffcc00;
-      }
-      
-      #play-again {
-        width: 130px;
-        height: 50px;
-        border-radius: 15px;
-      }
-      
-      @media only screen and (max-width: 600px) {
-        canvas {
-          width: 200px;
-          height: 200px; 
+        /* Tema scuro */
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background-color: #121212;
+            /* Colore scuro di sfondo */
+            color: #e0e0e0;
+            /* Colore chiaro per il testo */
         }
-      
-        #main-title {
-          font-size: 30px; 
-        }
-      
-        #bar {
-          width: 200px; 
-        }
-      
-        #bar button {
-          width: 60px; 
-        }
-      
-        #bar input {
-          width: 120px;
-        }
-      
-        table {
-          width: 200px;
-        }
-      
-        #play-again {
-          width: 100px;
-          height: 40px;
-        }
-      }
-    </style>
-  </head>
 
-  <body>
+        canvas {
+            margin: 20px;
+            border-radius: 10px;
+            width: 300px;
+            /* Larghezza di default per schermi più grandi */
+            height: 300px;
+            background-color: #1e1e1e;
+            /* Colore scuro per il canvas */
+        }
+
+        #main-title {
+            color: #e0e0e0;
+            /* Colore chiaro per il titolo */
+            font-size: 40px;
+            font-weight: bolder;
+            font-family: Georgia, serif;
+        }
+
+        #bar {
+            height: auto;
+            width: 300px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        #bar button {
+            width: 70px;
+            border-radius: 15px;
+            background-color: #333;
+            /* Pulsante scuro */
+            color: #e0e0e0;
+            /* Testo del pulsante */
+            border: 1px solid #444;
+        }
+
+        #bar input {
+            border-radius: 15px;
+            max-width: 200px;
+            background-color: #333;
+            /* Sfondo scuro per l'input */
+            color: #e0e0e0;
+            /* Testo chiaro per l'input */
+            border: 1px solid #444;
+        }
+
+        p {
+            font-family: Georgia, serif;
+            color: #e0e0e0;
+            /* Colore chiaro per il testo */
+        }
+
+        table {
+            margin: 20px;
+            border-collapse: collapse;
+            width: 300px;
+            text-align: center;
+            background-color: #1e1e1e;
+            /* Sfondo della tabella scuro */
+        }
+
+        th,
+        td {
+            padding: 3px;
+            border: 1px solid #444;
+            color: #e0e0e0;
+            /* Colore chiaro per il testo della tabella */
+        }
+
+        .arrow-up {
+            color: #00aaff;
+            font-size: 1.5em;
+        }
+
+        .success {
+            color: #ffcc00;
+            font-size: 1.5em;
+        }
+
+        .cold {
+            color: #00aaff;
+        }
+
+        .boiling {
+            color: #ff4500;
+            font-size: 1.5em;
+        }
+
+        .emoji-win {
+            font-size: 1.5em;
+            color: #ffcc00;
+        }
+
+        #play-again {
+            width: 130px;
+            height: 50px;
+            border-radius: 15px;
+            background-color: #333;
+            /* Sfondo del pulsante di "gioca ancora" scuro */
+            color: #e0e0e0;
+            /* Testo del pulsante chiaro */
+            border: 1px solid #444;
+        }
+
+        @media only screen and (max-width: 600px) {
+            canvas {
+                width: 200px;
+                height: 200px;
+                background-color: #1e1e1e;
+            }
+
+            #main-title {
+                font-size: 30px;
+            }
+
+            #bar {
+                width: 200px;
+            }
+
+            #bar button {
+                width: 60px;
+            }
+
+            #bar input {
+                width: 120px;
+            }
+
+            table {
+                width: 200px;
+            }
+
+            #play-again {
+                width: 100px;
+                height: 40px;
+            }
+        }
+    </style>
+</head>
+
+<body>
     <p id="main-title">Guess the angle</p>
 
     <canvas id="angleCanvas" width="400" height="400"></canvas>
 
     <div id="bar">
-      <input type="number" id="guessInput" placeholder="Input here..." onkeypress="if(event.key === 'Enter'){makeGuess();}" />
-      <button onclick="makeGuess()">Try</button>
-      <p>
-        <span id="attempts">0</span>/4
-      </p>
+        <input type="number" id="guessInput" placeholder="Input here..."
+            onkeypress="if(event.key === 'Enter'){makeGuess();}" />
+        <button onclick="makeGuess()">Try</button>
+        <p><span id="attempts">0</span>/4</p>
     </div>
 
     <div id="guess">
-      <table>
-        <tbody id="guessTableBody">
-          <!-- Righe dinamiche dei tentativi verranno aggiunte qui -->
-        </tbody>
-      </table>
+        <table>
+            <tbody id="guessTableBody">
+                <!-- Righe dinamiche dei tentativi verranno aggiunte qui -->
+            </tbody>
+        </table>
     </div>
 
     <button id="play-again" onclick="startNewGame()">Play again</button>
-    
+
     <script>
-      const canvas = document.getElementById('angleCanvas')
-      const ctx = canvas.getContext('2d')
-      const canvasCenterX = canvas.width / 2
-      const canvasCenterY = canvas.height / 2
-      let randomAngle, attempts
-      const guessTableBody = document.getElementById('guessTableBody')
-      const playAgainButton = document.getElementById('play-again')
-      
-      function initializeGame() {
-        randomAngle = Math.floor(Math.random() * 361)
-        attempts = 0
-        document.getElementById('attempts').textContent = attempts
-        guessTableBody.innerHTML = ''
-        drawAngle(randomAngle)
-        playAgainButton.style.display = 'none'
-      }
-      
-      function drawAngle(angle) {
-        ctx.clearRect(0, 0, canvas.width, canvas.height)
-      
-        // Ricalcola il centro del canvas in caso di ridimensionamento
+        const canvas = document.getElementById('angleCanvas')
+        const ctx = canvas.getContext('2d')
         const canvasCenterX = canvas.width / 2
         const canvasCenterY = canvas.height / 2
-      
-        const lineLength = 150
-        const startAngle = Math.random() * 2 * Math.PI
-      
-        const x1 = canvasCenterX + lineLength * Math.cos(startAngle)
-        const y1 = canvasCenterY + lineLength * Math.sin(startAngle)
-      
-        const x2 = canvasCenterX + lineLength * Math.cos(startAngle + (angle * Math.PI) / 180)
-        const y2 = canvasCenterY + lineLength * Math.sin(startAngle + (angle * Math.PI) / 180)
-      
-        ctx.beginPath()
-        ctx.moveTo(canvasCenterX, canvasCenterY)
-        ctx.strokeStyle = 'black'
-        ctx.lineWidth = 3
-        ctx.lineTo(x1, y1)
-        ctx.stroke()
-      
-        ctx.beginPath()
-        ctx.moveTo(canvasCenterX, canvasCenterY)
-        ctx.strokeStyle = 'black'
-        ctx.lineWidth = 3
-        ctx.lineTo(x2, y2)
-        ctx.stroke()
-      
-        ctx.beginPath()
-        ctx.arc(canvasCenterX, canvasCenterY, 50, startAngle, startAngle + (angle * Math.PI) / 180, false)
-        ctx.strokeStyle = 'red'
-        ctx.lineWidth = 2
-        ctx.stroke()
-      }
-      
-      function makeGuess() {
-        const guessInput = document.getElementById('guessInput')
-        const guess = parseInt(guessInput.value)
-      
-        if (isNaN(guess) || guess < 0 || guess > 360) {
-          const newRow = `<tr><td colspan="3">Number must be between 0 and 360</td></tr>`
-          guessTableBody.innerHTML += newRow
-          return
+        let randomAngle, attempts
+        const guessTableBody = document.getElementById('guessTableBody')
+        const playAgainButton = document.getElementById('play-again')
+
+        function initializeGame() {
+            randomAngle = Math.floor(Math.random() * 361)
+            attempts = 0
+            document.getElementById('attempts').textContent = attempts
+            guessTableBody.innerHTML = ''
+            drawAngle(randomAngle)
+            playAgainButton.style.display = 'none'
         }
-      
-        attempts++
-        document.getElementById('attempts').textContent = attempts
-      
-        const diff = Math.abs(guess - randomAngle)
-        let feedbackMessage = ''
-        let direction = ''
-      
-        if (guess < randomAngle) {
-          direction = `<span class="arrow-up">&#8593;</span>`
-        } else if (guess > randomAngle) {
-          direction = `<span class="arrow-up">&#8595;</span>`
-        } else {
-          direction = `<span class="emoji-win">&#127881;🎉</span>`
+
+        function drawAngle(angle) {
+            ctx.clearRect(0, 0, canvas.width, canvas.height)
+
+            // Ricalcola il centro del canvas in caso di ridimensionamento
+            const canvasCenterX = canvas.width / 2
+            const canvasCenterY = canvas.height / 2
+
+            const lineLength = 150
+            const startAngle = Math.random() * 2 * Math.PI
+
+            const x1 = canvasCenterX + lineLength * Math.cos(startAngle)
+            const y1 = canvasCenterY + lineLength * Math.sin(startAngle)
+
+            const x2 = canvasCenterX + lineLength * Math.cos(startAngle + (angle * Math.PI) / 180)
+            const y2 = canvasCenterY + lineLength * Math.sin(startAngle + (angle * Math.PI) / 180)
+
+            ctx.beginPath()
+            ctx.moveTo(canvasCenterX, canvasCenterY)
+            ctx.strokeStyle = 'black'
+            ctx.lineWidth = 3
+            ctx.lineTo(x1, y1)
+            ctx.stroke()
+
+            ctx.beginPath()
+            ctx.moveTo(canvasCenterX, canvasCenterY)
+            ctx.strokeStyle = 'black'
+            ctx.lineWidth = 3
+            ctx.lineTo(x2, y2)
+            ctx.stroke()
+
+            ctx.beginPath()
+            ctx.arc(canvasCenterX, canvasCenterY, 50, startAngle, startAngle + (angle * Math.PI) / 180, false)
+            ctx.strokeStyle = 'red'
+            ctx.lineWidth = 2
+            ctx.stroke()
         }
-      
-        if (diff === 0) {
-          feedbackMessage = `<span class="emoji-win">You Won!</span>`
-          endGame()
-        } else if (diff <= 4) {
-          feedbackMessage = `<span class="boiling">Boiling!&#128293;</span>`
-        } else if (diff <= 15) {
-          feedbackMessage = 'Hot!'
-        } else {
-          feedbackMessage = 'Cold!'
+
+        function makeGuess() {
+            const guessInput = document.getElementById('guessInput')
+            const guess = parseInt(guessInput.value)
+
+            if (isNaN(guess) || guess < 0 || guess > 360) {
+                const newRow = `<tr><td colspan="3">Number must be between 0 and 360</td></tr>`
+                guessTableBody.innerHTML += newRow
+                return
+            }
+
+            attempts++
+            document.getElementById('attempts').textContent = attempts
+
+            const diff = Math.abs(guess - randomAngle)
+            let feedbackMessage = ''
+            let direction = ''
+
+            if (guess < randomAngle) {
+                direction = `<span class="arrow-up">&#8593;</span>`
+            } else if (guess > randomAngle) {
+                direction = `<span class="arrow-up">&#8595;</span>`
+            } else {
+                direction = `<span class="emoji-win">&#127881;🎉</span>`
+            }
+
+            if (diff === 0) {
+                feedbackMessage = `<span class="emoji-win">You Won!</span>`
+                endGame()
+            } else if (diff <= 4) {
+                feedbackMessage = `<span class="boiling">Boiling!&#128293;</span>`
+            } else if (diff <= 15) {
+                feedbackMessage = 'Hot!'
+            } else {
+                feedbackMessage = 'Cold!'
+            }
+
+            const newRow = `<tr><td>${guess}°</td><td>${direction}</td><td>${feedbackMessage}</td></tr>`
+            guessTableBody.innerHTML += newRow
+
+            if (attempts === 4 && diff !== 0) {
+                const gameOverRow = `<tr><td colspan="3">Missed opportunity, angle was ${randomAngle}.</td></tr>`
+                guessTableBody.innerHTML += gameOverRow
+                endGame()
+            }
+
+            guessInput.value = ''
         }
-      
-        const newRow = `<tr><td>${guess}°</td><td>${direction}</td><td>${feedbackMessage}</td></tr>`
-        guessTableBody.innerHTML += newRow
-      
-        if (attempts === 4 && diff !== 0) {
-          const gameOverRow = `<tr><td colspan="3">Missed opportunity, angle was ${randomAngle}.</td></tr>`
-          guessTableBody.innerHTML += gameOverRow
-          endGame()
+
+        function endGame() {
+            playAgainButton.style.display = 'block'
         }
-      
-        guessInput.value = ''
-      }
-      
-      function endGame() {
-        playAgainButton.style.display = 'block'
-      }
-      
-      function startNewGame() {
+
+        function startNewGame() {
+            initializeGame()
+        }
+
         initializeGame()
-      }
-      
-      initializeGame()
     </script>
-  </body>
+</body>
+
 </html>
